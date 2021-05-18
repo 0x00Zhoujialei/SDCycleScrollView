@@ -439,7 +439,9 @@ NSString * const ID = @"SDCycleScrollViewCell";
         _progress = 0;
         [self automaticScroll];
     }
-    _progressUploadBlock(_progress);
+    if (_progressUploadBlock) {
+        _progressUploadBlock(_progress);
+    }
 }
 
 - (void)automaticScroll
