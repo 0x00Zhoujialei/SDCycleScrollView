@@ -49,6 +49,8 @@ NSString * const ID = @"SDCycleScrollViewCell";
 @property (nonatomic, weak) NSTimer *timer;
 @property (nonatomic, assign) NSInteger totalItemsCount;
 @property (nonatomic, weak) UIControl *pageControl;
+@property (nonatomic, assign) NSTimeInterval timerSecond;
+@property (nonatomic, assign) double progress;
 
 @property (nonatomic, strong) UIImageView *backgroundImageView; // 当imageURLs为空时的背景图
 
@@ -87,6 +89,7 @@ NSString * const ID = @"SDCycleScrollViewCell";
     _pageControlDotSize = kCycleScrollViewInitialPageControlDotSize;
     _pageControlBottomOffset = 0;
     _pageControlRightOffset = 0;
+    _timerSecond = 0.01;
     _pageControlStyle = SDCycleScrollViewPageContolStyleClassic;
     _hidesForSinglePage = YES;
     _currentPageDotColor = [UIColor whiteColor];
@@ -368,7 +371,7 @@ NSString * const ID = @"SDCycleScrollViewCell";
 {
     [self invalidateTimer]; // 创建定时器前先停止定时器，不然会出现僵尸定时器，导致轮播频率错误
     
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.autoScrollTimeInterval target:self selector:@selector(automaticScroll) userInfo:nil repeats:YES];
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.timerSecond target:self selector:@selector(automaticScroll) userInfo:nil repeats:YES];
     _timer = timer;
     [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
 }
@@ -428,6 +431,16 @@ NSString * const ID = @"SDCycleScrollViewCell";
     }
 }
 
+- (void)updateProgress() {
+    float perTime = _autoScrollTimeInterval / _timerSecond;
+    float aProgress = 1 / perTime;
+    _progress += aProgress;
+    if (_progress >= 1) {
+        _progress = 0;
+        [self automaticScroll];
+    }
+    _progressUploadBlock(_progress);
+}
 
 - (void)automaticScroll
 {
