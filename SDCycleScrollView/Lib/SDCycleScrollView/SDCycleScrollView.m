@@ -431,7 +431,7 @@ NSString * const ID = @"SDCycleScrollViewCell";
     }
 }
 
-- (void)updateProgress() {
+- (void)updateProgress {
     float perTime = _autoScrollTimeInterval / _timerSecond;
     float aProgress = 1 / perTime;
     _progress += aProgress;
