@@ -53,6 +53,7 @@ NSString * const ID = @"SDCycleScrollViewCell";
 @property (nonatomic, assign) double progress;
 
 @property (nonatomic, strong) UIImageView *backgroundImageView; // 当imageURLs为空时的背景图
+@property (nonatomic, assign) int originIndex;
 
 @end
 
@@ -656,6 +657,10 @@ NSString * const ID = @"SDCycleScrollViewCell";
 {
     if (!self.imagePathsGroup.count) return; // 解决清除timer时偶尔会出现的问题
     int itemIndex = [self currentIndex];
+    if (itemIndex != self.originIndex) {
+        self.progress = 0;
+        self.originIndex = itemIndex;
+    }
     int indexOnPageControl = [self pageControlIndexWithCurrentCellIndex:itemIndex];
     
     if ([self.pageControl isKindOfClass:[TAPageControl class]]) {
