@@ -58,6 +58,11 @@ typedef enum {
 /** 图片滚动回调 */
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didScrollToIndex:(NSInteger)index;
 
+/* 手动滑动 开始*/
+- (void)cycleScrollViewWillBeginDragging:(SDCycleScrollView *)cycleScrollView;
+
+/* 手动滑动 结束*/
+- (void)cycleScrollViewDidEndDragging:(SDCycleScrollView *)cycleScrollView willDecelerate:(BOOL)decelerate;
 
 - (void)cycleScrollViewDidScroll:(UIScrollView *)scrollView index:(NSInteger)index;
 

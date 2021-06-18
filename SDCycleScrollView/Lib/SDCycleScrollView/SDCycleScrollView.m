@@ -680,12 +680,18 @@ NSString * const ID = @"SDCycleScrollViewCell";
     if (self.autoScroll) {
         [self invalidateTimer];
     }
+    if ([self.delegate respondsToSelector:@selector(cycleScrollViewWillBeginDragging:)]) {
+        [self.delegate cycleScrollViewWillBeginDragging:scrollView];
+    }
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     if (self.autoScroll) {
         [self setupTimer];
+    }
+    if ([self.delegate respondsToSelector:@selector(cycleScrollViewDidEndDragging:willDecelerate:)]) {
+        [self.delegate cycleScrollViewDidEndDragging:scrollView willDecelerate:decelerate];
     }
 }
 
