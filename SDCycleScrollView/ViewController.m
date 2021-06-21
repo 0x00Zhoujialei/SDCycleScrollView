@@ -181,12 +181,12 @@
     [self.navigationController pushViewController:[NSClassFromString(@"DemoVCWithXib") new] animated:YES];
 }
 
-- (void)cycleScrollViewWillBeginDragging:(SDCycleScrollView *)cycleScrollView {
+- (void)cycleScrollViewWillBeginDragging:(UIScrollView *)scrollView {
     NSLog(@"cycleScrollViewWillBeginDragging");
 }
 
-- (void)cycleScrollViewDidEndDragging:(SDCycleScrollView *)cycleScrollView willDecelerate:(BOOL)decelerate {
-    NSLog(@"cycleScrollViewDidEndDragging: willDecelerate: ");
+- (void)cycleScrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate index:(NSInteger)index{
+    NSLog(@"cycleScrollViewDidEndDragging: willDecelerate: %d",index);
 }
 
 

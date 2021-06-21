@@ -690,8 +690,14 @@ NSString * const ID = @"SDCycleScrollViewCell";
     if (self.autoScroll) {
         [self setupTimer];
     }
-    if ([self.delegate respondsToSelector:@selector(cycleScrollViewDidEndDragging:willDecelerate:)]) {
-        [self.delegate cycleScrollViewDidEndDragging:scrollView willDecelerate:decelerate];
+    int itemIndex = [self currentIndex];
+    if (itemIndex != self.originIndex) {
+        self.progress = 0;
+        self.originIndex = itemIndex;
+    }
+    int indexOnPageControl = [self pageControlIndexWithCurrentCellIndex:itemIndex];
+    if ([self.delegate respondsToSelector:@selector(cycleScrollViewDidEndDragging:willDecelerate:index:)]) {
+        [self.delegate cycleScrollViewDidEndDragging:scrollView willDecelerate:decelerate index:indexOnPageControl];
     }
 }
 

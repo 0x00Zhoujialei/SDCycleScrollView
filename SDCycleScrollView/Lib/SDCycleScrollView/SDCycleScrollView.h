@@ -59,10 +59,10 @@ typedef enum {
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didScrollToIndex:(NSInteger)index;
 
 /* 手动滑动 开始*/
-- (void)cycleScrollViewWillBeginDragging:(SDCycleScrollView *)cycleScrollView;
+- (void)cycleScrollViewWillBeginDragging:(UIScrollView *)scrollView;
 
 /* 手动滑动 结束*/
-- (void)cycleScrollViewDidEndDragging:(SDCycleScrollView *)cycleScrollView willDecelerate:(BOOL)decelerate;
+- (void)cycleScrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate index:(NSInteger)index;
 
 - (void)cycleScrollViewDidScroll:(UIScrollView *)scrollView index:(NSInteger)index;
 
